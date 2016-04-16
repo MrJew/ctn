@@ -1,14 +1,14 @@
 package game.cards;
 
-import game.cards.configuration.CardConfiguration.DevelopmentType;
+import game.cards.configuration.CardConfiguration.StandardDevelopmentType;
 
 public class DevelopmentCard extends Card{
 	private String action;
-	private DevelopmentType type;
+	private StandardDevelopmentType type;
 	
-	public DevelopmentCard(String name, DevelopmentType type, String action) {
-		super(name);
-		this.action = action;
+	public DevelopmentCard(StandardDevelopmentType type) {
+		super(type.getName());
+		this.action = this.type.getDescription();
 		this.type = type;
 	}
 	

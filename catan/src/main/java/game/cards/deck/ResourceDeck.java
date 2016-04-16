@@ -7,7 +7,7 @@ import java.util.Stack;
 
 import game.cards.ResourceCard;
 import game.cards.configuration.CardConfiguration.Expansion;
-import game.cards.configuration.CardConfiguration.ResourceType;
+import game.cards.configuration.CardConfiguration.StandardResourceType;
 import game.cards.configuration.CardConfiguration.StandardCatanCardQuantities;
 
 /**
@@ -18,10 +18,10 @@ import game.cards.configuration.CardConfiguration.StandardCatanCardQuantities;
 public class ResourceDeck extends Deck {
 	private ResourceCard card;
 	private int maxNumberOfCards;
-	private Stack<ResourceCard> deck;
 	
-	public ResourceDeck(ResourceCard card, ResourceType type, Expansion exp) {
-		this.card = card;
+	public ResourceDeck(StandardResourceType type, Expansion exp) {
+		super();
+		this.card = new ResourceCard(type);
 		
 		switch (exp){
 		case STANDARD_CATAN:
@@ -29,9 +29,8 @@ public class ResourceDeck extends Deck {
 			break;
 		}
 		
-		deck = new Stack<ResourceCard>();
 		for(int i=0;i<this.maxNumberOfCards;i++){
-			deck.push(new ResourceCard(this.card));
+			this.deck.push(new ResourceCard(this.card));
 		}
 	}
 	
@@ -44,7 +43,7 @@ public class ResourceDeck extends Deck {
 	}
 	
 	public ResourceCard getCard(){
-		return this.deck.pop();
+		return (ResourceCard) this.deck.pop();
 	}
 	
 }

@@ -44,7 +44,7 @@ public final class CardConfiguration {
 	 * @author Sparksmith
 	 *
 	 */
-	public enum ResourceType {
+	public enum StandardResourceType {
 		HILL ("/this/is/the/location/hill.png"),
 		FOREST ("/this/is/the/location/forest.png"),
 		MOUNTAIN ("/this/is/the/location/mountain.png"),
@@ -55,7 +55,7 @@ public final class CardConfiguration {
 		SEA ("/this/is/the/location/sea.png");
 		
 		private final String location;
-		ResourceType(String location){
+		StandardResourceType(String location){
 			this.location = location;
 		}
 		
@@ -67,20 +67,29 @@ public final class CardConfiguration {
 	 * Definition of a Development Card Type and image location
 	 * @author Sparksmith
 	 */
-	public enum DevelopmentType{
-		SOLDIER ("/this/is/the/location/soldier.png"),
-		POINT ("/this/is/the/location/point.png"),
-		MONOPOLY ("/this/is/the/location/monopoly.png"),
-		ROAD ("/this/is/the/location/road.png"),
-		PLENTY ("/this/is/the/location/plenty.png");
+	public enum StandardDevelopmentType{
+		SOLDIER ("Soldier", "/this/is/the/location/soldier.png","Move the pirate to any hex on the board (except desert). Steal 1 resrource card from the owner of a city/village adjacent to that hex." ),
+		POINT ("Victory Point", "/this/is/the/location/point.png", "+1 Point. Reveal this card if with it you reach the number of points required for victory."),
+		MONOPOLY ("Monopoly", "/this/is/the/location/monopoly.png", "When you play this card announce one type of resource. All other players must give you all their resource cards of that type."),
+		ROAD ("Road Building", "/this/is/the/location/road.png", "Place 2 roads as if you had built them."),
+		PLENTY ("Year of Plenty", "/this/is/the/location/plenty.png", "Take any 2 resource cards from the bank and add them to your hand. They can be two different resource or two of the same resource. They may immediately be used to build.");
 		
 		private String location;
-		DevelopmentType(String location){
+		private String description;
+		private String name;
+		StandardDevelopmentType(String name, String location, String description){
 			this.location = location;
+			this.name = name;
+			this.description = description;
 		}
-		
+		public String getDescription(){
+			return this.description;
+		}
 		public String getImageLocation(){
 			return this.location;
+		}
+		public String getName(){
+			return this.name;
 		}
 		
 	}

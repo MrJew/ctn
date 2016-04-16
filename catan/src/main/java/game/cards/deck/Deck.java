@@ -12,8 +12,12 @@ import game.cards.Card;
  *
  */
 public abstract class Deck {
-	private Stack<Card> deck;
+	protected Stack<Card> deck;
 	private int initialSize;
+	
+	public Deck(){
+		deck = new Stack<Card>();
+	}
 	
 	public int getInitialSize(){
 		return this.initialSize;

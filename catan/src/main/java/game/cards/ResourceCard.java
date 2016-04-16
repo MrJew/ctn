@@ -1,12 +1,12 @@
 package game.cards;
 
-import game.cards.configuration.CardConfiguration.ResourceType;
+import game.cards.configuration.CardConfiguration.StandardResourceType;
 
 public class ResourceCard extends Card{
-	private ResourceType type;
+	private StandardResourceType type;
 	
-	public ResourceCard(String name, ResourceType type) {
-		super(name);
+	public ResourceCard(StandardResourceType type) {
+		super(type.name());
 		this.type = type;
 	}
 
@@ -15,7 +15,7 @@ public class ResourceCard extends Card{
 		this.type = card.getType();
 	}
 	
-	public ResourceType getType(){
+	public StandardResourceType getType(){
 		return this.type;
 	}
 }
