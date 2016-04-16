@@ -28,12 +28,14 @@ public class CatanServerController {
 	    router.route().handler(CookieHandler.create());
 	    router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)));
 	    
+	    // GET
 	    router.get("/").handler(this::handleLobbyPage);
 	    router.get("/games/:gameID").handler(this::getGameSession);
+
+	    // PUT
+	    router.put("/createSession").handler(this::createGameSession);
+	    
 	    router.route().handler(StaticHandler.create("web/").setCachingEnabled(false));
-	    
-	    
-	    
 	}
 	
 	private void handleLobbyPage(RoutingContext routingContext){
@@ -51,8 +53,6 @@ public class CatanServerController {
     }
 	
 	private void getGameSession(RoutingContext routingContext){
-		
-		
 		String gameID = routingContext.request().getParam("gameID");
 		System.out.println(gameID);
 		String jsonString = gameSessionService.getJson(gameID);
@@ -60,7 +60,7 @@ public class CatanServerController {
 		routingContext.response().putHeader("content-type", "application/json").end(jsonString);
 	}
 	
-	public void createGameSession() {
+	private void createGameSession(RoutingContext routingContext) {
 		gameSessionService.newGameSession();
 	}
 	
