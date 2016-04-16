@@ -42,8 +42,10 @@ public class ResourceDeck extends Deck {
 		}
 	}
 	
-	public ResourceCard getCard(){
-		return (ResourceCard) this.deck.pop();
+	public void returnCards(int count){
+		for(int i=0;i<count;i++){
+			this.returnCard();
+		}
 	}
 	
 }

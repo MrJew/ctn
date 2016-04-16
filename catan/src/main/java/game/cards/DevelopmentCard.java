@@ -8,7 +8,7 @@ public class DevelopmentCard extends Card{
 	
 	public DevelopmentCard(StandardDevelopmentType type) {
 		super(type.getName());
-		this.action = this.type.getDescription();
+		this.action = type.getDescription();
 		this.type = type;
 	}
 	
