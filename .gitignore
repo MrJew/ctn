@@ -1,1 +1,9 @@
 .idea
+.metadata/
+catan/target/
+RemoteSystemsTempFiles/.project
+catan/.settings/org.eclipse.jdt.core.prefs
+catan/.settings/org.eclipse.m2e.core.prefs
+catan/RemoteSystemsTempFiles/.project
+catan/bin/com/boardgames/catan/App.class
+catan/bin/com/boardgames/catan/AppTest.class
