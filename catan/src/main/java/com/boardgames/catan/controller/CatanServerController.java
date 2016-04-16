@@ -27,10 +27,11 @@ public class CatanServerController {
 	public void init(){
 	    router.route().handler(CookieHandler.create());
 	    router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)));
-	    router.route().handler(StaticHandler.create().setCachingEnabled(false));
-	
+	    
 	    router.get("/").handler(this::handleLobbyPage);
+	    router.route().handler(StaticHandler.create("web/").setCachingEnabled(false));
 	    router.get("/:gameID").handler(this::getGameSession);
+	    
 	    
 	    
 	}
@@ -44,7 +45,7 @@ public class CatanServerController {
 
         session.put("hitcount", cnt);
 
-        routingContext.response().putHeader("content-type", "text/html").sendFile("webroot/index.html");
+        routingContext.response().putHeader("content-type", "text/html").sendFile("web/app/index.html");
         System.out.println(cnt);
 	    
     }
@@ -53,6 +54,7 @@ public class CatanServerController {
 		
 		
 		String gameID = routingContext.request().getParam("gameID");
+		System.out.println(gameID);
 		String jsonString = gameSessionService.getJson(gameID);
 		
 		routingContext.response().putHeader("content-type", "application/json").end(jsonString);
