@@ -3,8 +3,6 @@
  */
 package game.cards.deck;
 
-import java.util.Stack;
-
 import game.cards.ResourceCard;
 import game.cards.configuration.CardConfiguration.Expansion;
 import game.cards.configuration.CardConfiguration.StandardResourceType;
