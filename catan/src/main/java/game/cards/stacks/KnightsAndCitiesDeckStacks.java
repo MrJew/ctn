@@ -5,6 +5,6 @@ package game.cards.stacks;
  * @author Sparksmith
  *
  */
-public class KnightsAndCitiesDecksStack {
+public class KnightsAndCitiesDeckStacks {
 
 }

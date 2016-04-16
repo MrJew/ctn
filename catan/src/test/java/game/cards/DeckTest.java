@@ -1,7 +1,7 @@
 /**
  * 
  */
-package game.deck;
+package game.cards;
 
 import java.util.ArrayList;
 
