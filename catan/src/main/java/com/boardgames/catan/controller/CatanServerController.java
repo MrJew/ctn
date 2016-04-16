@@ -29,8 +29,8 @@ public class CatanServerController {
 	    router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)));
 	    
 	    router.get("/").handler(this::handleLobbyPage);
+	    router.get("/games/:gameID").handler(this::getGameSession);
 	    router.route().handler(StaticHandler.create("web/").setCachingEnabled(false));
-	    router.get("/:gameID").handler(this::getGameSession);
 	    
 	    
 	    
