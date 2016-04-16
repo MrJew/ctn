@@ -1,0 +1,23 @@
+{
+  "name": "ctn",
+  "homepage": "https://github.com/MrJew/ctn",
+  "authors": [
+    "Atanas Bozhkov <bozhkov.atanas@gmail.com>"
+  ],
+  "description": "Web front end for the catan game",
+  "main": "index.html",
+  "keywords": [
+    "catan",
+    "web",
+    "game"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
