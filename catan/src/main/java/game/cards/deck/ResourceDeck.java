@@ -41,9 +41,4 @@ public class ResourceDeck extends Deck {
 			this.deck.push(new ResourceCard(this.card));
 		}
 	}
-	
-	public ResourceCard getCard(){
-		return (ResourceCard) this.deck.pop();
-	}
-	
 }

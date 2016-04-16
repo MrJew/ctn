@@ -6,6 +6,7 @@ package game.cards.deck;
 import java.util.Stack;
 
 import game.cards.Card;
+import game.cards.ResourceCard;
 
 /**
  * @author Sparksmith
@@ -13,17 +14,25 @@ import game.cards.Card;
  */
 public abstract class Deck {
 	protected Stack<Card> deck;
-	private int initialSize;
+	protected int initialSize;
 	
 	public Deck(){
 		deck = new Stack<Card>();
 	}
-	
+
 	public int getInitialSize(){
 		return this.initialSize;
 	}
 	
-	public int currentSize(){
+	public int getCurrentSize(){
 		return this.deck.size();
+	}
+	
+	public Card getCard(){
+		if(deck.size()>0){
+			return this.deck.pop();
+		}else{
+			return null;
+		}
 	}
 }
