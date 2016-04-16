@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name ctnApp
+ * @name webApp
  * @description
- * # ctnApp
+ * # webApp
  *
  * Main module of the application.
  */
 angular
-  .module('ctnApp', [
+  .module('webApp', [
     'ngAnimate',
     'ngAria',
     'ngCookies',
@@ -25,6 +25,11 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
+      })
+      .when('/about', {
+        templateUrl: 'views/about.html',
+        controller: 'AboutCtrl',
+        controllerAs: 'about'
       })
       .otherwise({
         redirectTo: '/'
