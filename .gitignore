@@ -108,3 +108,5 @@ catan/bin/webroot/static/img/tile_pustinq.png
 catan/bin/webroot/static/img/tile_seno.png
 catan/bin/webroot/static/img/victory_point_card.png
 catan/bin/src/main/java/com/boardgames/catan/controller/CatanServerWebsockets.class
+catan/.classpath
+catan/.project
