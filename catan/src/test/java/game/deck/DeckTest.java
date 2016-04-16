@@ -78,6 +78,22 @@ public class DeckTest extends TestCase {
 		assertNotSame(deck.get(1), deck.get(0));
 	}
 	
+	public void testDevelopmentGetXCards(){
+		ArrayList<Card> deck = new ArrayList<>();
+		deck = developmentDeck.getCard(17);
+		assertEquals(8, developmentDeck.getCurrentSize());
+		assertEquals(17, deck.size());
+		assertNotSame(deck.get(1), deck.get(0));
+	}
+	
+	public void testResourceReturnXCards(){
+		int size1 = resourceDeck.getCurrentSize();
+		resourceDeck.getCard(2);
+		resourceDeck.returnCards(2);
+		int size2 = resourceDeck.getCurrentSize();
+		assertEquals(size1, size2);
+	}
+	
 	public void testDevelopmentGet20Cards(){
 		for(int i =0;i<19;i++){
 			Card testCard = developmentDeck.getCard();
