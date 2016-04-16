@@ -3,6 +3,7 @@
  */
 package game.cards.deck;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 import game.cards.Card;
@@ -34,5 +35,18 @@ public abstract class Deck {
 		}else{
 			return null;
 		}
+	}
+	
+	public ArrayList<Card> getCard(int count){
+		ArrayList<Card> result =  new ArrayList<Card>();
+		
+		for(int i=0;i<count;i++){
+			result.add(this.getCard());
+			if( result.get(result.size()-1) == null ){
+				result.remove(result.size());
+				return result;
+			}
+		}
+		return result;
 	}
 }

@@ -1,12 +1,10 @@
-/**
- * 
- */
 package game.cards.stacks;
 
 /**
+ * HAHAHA no
  * @author Sparksmith
  *
  */
-public class StandardCatanDeck {
+public class KnightsAndCitiesDecksStack {
 
 }

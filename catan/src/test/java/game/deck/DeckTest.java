@@ -70,6 +70,14 @@ public class DeckTest extends TestCase {
 		}
 	}
 	
+	public void testResourceGetXCards(){
+		ArrayList<Card> deck = new ArrayList<>();
+		deck = resourceDeck.getCard(17);
+		assertEquals(2, resourceDeck.getCurrentSize());
+		assertEquals(17, deck.size());
+		assertNotSame(deck.get(1), deck.get(0));
+	}
+	
 	public void testDevelopmentGet20Cards(){
 		for(int i =0;i<19;i++){
 			Card testCard = developmentDeck.getCard();
