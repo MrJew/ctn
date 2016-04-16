@@ -17,9 +17,21 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngMaterial'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+      .primaryPalette('cyan', {
+      'default': '400',
+        'hue-1': '100',
+        'hue-2': '600',
+        'hue-3': 'A100'
+    })
+    .accentPalette('amber')
+      .warnPalette('red')
+      .backgroundPalette('grey');
+
+
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
