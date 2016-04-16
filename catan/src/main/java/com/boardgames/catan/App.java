@@ -11,7 +11,7 @@ public class App extends AbstractVerticle {
         vertx
             .createHttpServer()
             .requestHandler(r -> {
-                r.response().end("<h1>Zdraveite gei4enca</h1>");
+                r.response().sendFile("web/index.html");
             })
             .listen(8080, result -> {
                 if (result.succeeded()) {
