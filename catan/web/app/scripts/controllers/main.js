@@ -23,17 +23,6 @@ angular.module('webApp')
   				controller: 'AddModalCtrl'
   			});
   		};
-  		/*$scope.addSession = function(){
-
-  			var data = $.param({
-  	                game: "Settlers of Cattan",
-  	                players: 4,
-  	        });
-
-  			$http.post("http://localhost:8080/createSession", data).success(function(data, status){
-  				console.log("New session created:\n" + data)
-  			});
-  		};*/
 
   		var ws = $websocket('ws://localhost:8081');
   		ws.binaryType = "arraybuffer";
@@ -63,11 +52,31 @@ angular.module('webApp')
 	      'Karma'
 	    ];
   })
-  .controller('AddModalCtrl', function($scope){
+  .controller('AddModalCtrl', function($scope, $httpParamSerializer, $http){
 	  $scope.gameTypes = [
-	            			{'name':"Sttlrs Ctn"},
-	            			{'name':"Cities and Knights"},
-	            			{'name':"Seafares"}
+	            			"Sttlrs Ctn",
+	            			"Cities and Knights",
+	            			"Seafares"
 	  ];
-    $scope.selectedGameType;
+    $scope.playerCount = [2,3,4,5,6];
+
+    $scope.dialog={};
+    $scope.dialog.name="";
+    $scope.dialog.selectedGameType = "Sttlrs Ctn";
+    $scope.dialog.selectedPlayerCount=4;
+
+    $scope.submit = function(){
+      console.log($scope.dialog.toString());
+
+      var data = $httpParamSerializer($scope.dialog);
+
+      $http({
+        method: 'POST',
+        url: "http://localhost:8080/createSession",
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        data: data
+      }).success(function(data, status){
+        console.log("New session created:\n" + data)
+      });
+    }
   });
