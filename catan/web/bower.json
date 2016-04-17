@@ -2,7 +2,7 @@
   "name": "web",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "^1.4.0",
+    "angular": "^1.5.3",
     "angular-animate": "^1.4.0",
     "angular-aria": "^1.4.0",
     "angular-cookies": "^1.4.0",
@@ -10,7 +10,7 @@
     "angular-resource": "^1.4.0",
     "angular-route": "^1.4.0",
     "angular-sanitize": "^1.4.0",
-    "angular-material": "^1.0.7",
+    "angular-material": "^1.1.0-rc4",
     "angular-websocket": "^1.1.0"
   },
   "devDependencies": {
