@@ -110,3 +110,5 @@ catan/bin/webroot/static/img/victory_point_card.png
 catan/bin/src/main/java/com/boardgames/catan/controller/CatanServerWebsockets.class
 catan/.classpath
 catan/.project
+.recommenders/
+.classpath
