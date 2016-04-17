@@ -11,10 +11,10 @@
 	</md-input-container>
 
 	<md-input-container class="md-default-theme">
-		<md-select ng-model="gameTypes" class="ng-pristine ng-valid ng-touched" placeholder="Sttlrs Ctn">
+		<md-select ng-model="selectedGameType" class="ng-pristine ng-valid ng-touched" placeholder="Game Type">
 			<md-option
         ng-value="gameType.name"
-        ng-repeat="gameType in gameTypes track by $index">
+        ng-repeat="gameType in gameTypes">
 
           {{ gameType.name }}
 

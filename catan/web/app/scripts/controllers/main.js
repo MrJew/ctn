@@ -63,10 +63,11 @@ angular.module('webApp')
 	      'Karma'
 	    ];
   })
-  .controller('AddModalCtrl', function($scope, $mdDialog){
+  .controller('AddModalCtrl', function($scope){
 	  $scope.gameTypes = [
 	            			{'name':"Sttlrs Ctn"},
 	            			{'name':"Cities and Knights"},
 	            			{'name':"Seafares"}
 	  ];
+    $scope.selectedGameType;
   });
