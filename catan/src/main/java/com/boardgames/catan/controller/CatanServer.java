@@ -1,5 +1,8 @@
 package com.boardgames.catan.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
@@ -24,7 +27,7 @@ public class CatanServer extends AbstractVerticle {
 		Router router = catanServerController.getRouter();
 		
 		final EventBus eventBus = vertx.eventBus();
-		
+		List<String> session = new ArrayList<>();
 		vertx.createHttpServer().requestHandler(router::accept).listen(8080);
 		vertx.createHttpServer().websocketHandler(new Handler<ServerWebSocket>(){
 			
@@ -33,6 +36,7 @@ public class CatanServer extends AbstractVerticle {
 			public void handle(final ServerWebSocket ws) {
 				
 				String id = ws.textHandlerID();
+				session.add(id);
 				System.out.println("Registering new ws connection for id: "+id);
 				
 				ws.closeHandler(new Handler<Void>(){
@@ -46,7 +50,9 @@ public class CatanServer extends AbstractVerticle {
 					@Override
 					public void handle(Buffer event) {
 						System.out.println(event.toString());
-						eventBus.send(id, "Dice roll 6");
+						for(String sessionId : session){
+							eventBus.send(sessionId, "Dice roll 6");
+						}
 					}
 				});
 			}
