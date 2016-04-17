@@ -17,7 +17,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngMaterial'
+    'ngMaterial',
+    'ngWebSocket'
   ])
   .config(function ($routeProvider, $mdThemingProvider) {
     $mdThemingProvider.theme('default')

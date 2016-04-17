@@ -22,18 +22,22 @@ public class GameSessionService {
 		
 	public String getJson(String gameID) {
 		Optional<GameSession> gameSessionOptional = gameSessions.stream().filter(gameSession -> gameSession.getId().equals(gameID)).findFirst();
-		String gameSessionJsonString = "[]";
+		return extractJsonFromObject(gameSessionOptional.get());
+	}
+	
+	public String addGameSession() {
+		GameSession gameSession = new GameSession();
+		return extractJsonFromObject(gameSession);
+	}
+	
+	private String extractJsonFromObject(Object obj){
+		String result = "{}";
 		try {
-			gameSessionJsonString = objectMapper.writeValueAsString(gameSessionOptional.get());
+			result = objectMapper.writeValueAsString(obj);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		return gameSessionJsonString;
-	}
-	
-	public void newGameSession() {
-		GameSession gameSession = new GameSession();
-		
+		return result;
 	}
 	
 }
