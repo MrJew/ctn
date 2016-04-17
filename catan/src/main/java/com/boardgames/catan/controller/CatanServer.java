@@ -18,46 +18,16 @@ public class CatanServer extends AbstractVerticle {
 	
 	@Override
     public void start(Future<Void> fut) {
+		// Initialise main Http server
 		CatanServerController catanServerController = new CatanServerController(vertx);
 		catanServerController.init();
-		
-		CatanServerWebsockets catanServerWebsockets = new CatanServerWebsockets(vertx);
-		//catanServerWebsockets.init();
-		
 		Router router = catanServerController.getRouter();
-		
-		final EventBus eventBus = vertx.eventBus();
-		List<String> session = new ArrayList<>();
 		vertx.createHttpServer().requestHandler(router::accept).listen(8080);
-		vertx.createHttpServer().websocketHandler(new Handler<ServerWebSocket>(){
-			
-			
-			@Override
-			public void handle(final ServerWebSocket ws) {
-				
-				String id = ws.textHandlerID();
-				session.add(id);
-				System.out.println("Registering new ws connection for id: "+id);
-				
-				ws.closeHandler(new Handler<Void>(){
-					@Override
-					public void handle(Void event) {
-						System.out.println("Closing hanlder");
-					}
-				});
-				
-				ws.handler(new Handler<Buffer>(){
-					@Override
-					public void handle(Buffer event) {
-						System.out.println(event.toString());
-						for(String sessionId : session){
-							eventBus.send(sessionId, "Dice roll 6");
-						}
-					}
-				});
-			}
 		
-		}).listen(8081);
+		// Initialise WebSocket Http server
+		CatanServerWebsockets catanServerWebsockets = new CatanServerWebsockets(vertx);
+		vertx.createHttpServer().websocketHandler(catanServerWebsockets).listen(8081);
+		
 	}
 	
 	private void test(ServerWebSocket request){
