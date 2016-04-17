@@ -2,6 +2,7 @@ package com.boardgames.catan.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import com.boardgames.catan.gameSession.GameSession;
@@ -14,11 +15,19 @@ public class GameSessionService {
 
 	private List<GameSession> gameSessions;
 	private ObjectMapper objectMapper;
+	private static GameSessionService instance = null;
 	
-	public GameSessionService() {
+	private GameSessionService() {
 		gameSessions = new ArrayList<>();
 		objectMapper = new ObjectMapper();
 	}
+	
+	public static GameSessionService getInstance() {
+	      if(instance == null) {
+	         instance = new GameSessionService();
+	      }
+	      return instance;
+	   }
 		
 	public String getJson(String gameID) {
 		Optional<GameSession> gameSessionOptional = gameSessions.stream().filter(gameSession -> gameSession.getId().equals(gameID)).findFirst();
@@ -38,6 +47,17 @@ public class GameSessionService {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	public GameSession getGameSessionInstance(String gameID){
+		Optional<GameSession> gameSessionOptional = gameSessions.stream().filter(gameSession -> gameSession.getId().equals(gameID)).findFirst();
+		GameSession gs = null;
+		try {
+			gs = gameSessionOptional.get();
+		} catch (NoSuchElementException e){
+			e.printStackTrace();
+		}
+		return gs;
 	}
 	
 }

@@ -21,7 +21,7 @@ public class CatanServerController {
 	public CatanServerController (Vertx vertx) {
 		this.vertx = vertx;
 		router = Router.router(vertx);
-		gameSessionService = new GameSessionService();
+		gameSessionService = GameSessionService.getInstance();
 	}
 	
 	public void init(){
@@ -42,6 +42,7 @@ public class CatanServerController {
 	private void handleLobbyPage(RoutingContext routingContext){
 	
         Session session = routingContext.session();
+        System.out.println(session.id());
 
         Integer cnt = session.get("hitcount");
         cnt = (cnt == null ? 0 : cnt) + 1;

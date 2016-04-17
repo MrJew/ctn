@@ -2,6 +2,10 @@ package com.boardgames.catan.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONObject;
+
+import com.boardgames.catan.gameSession.GameSession;
+import com.boardgames.catan.services.GameSessionService;
 
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
@@ -12,15 +16,17 @@ import io.vertx.core.http.impl.ServerWebSocketImpl;
 import io.vertx.core.net.NetServer;
 import io.vertx.core.net.NetSocket;
 
+
 public class CatanServerWebsockets implements Handler<ServerWebSocket>{
 
 	final EventBus eventBus;
 	List<String> session;
+	GameSessionService gameSessionService;
 	
 	public CatanServerWebsockets (Vertx vertx){
 		eventBus = vertx.eventBus();
 		session = new ArrayList<>();
-		
+		gameSessionService = GameSessionService.getInstance();
 	}
 	
 	@Override
@@ -40,9 +46,28 @@ public class CatanServerWebsockets implements Handler<ServerWebSocket>{
 		ws.handler(new Handler<Buffer>(){
 			@Override
 			public void handle(Buffer event) {
-				System.out.println(event.toString());
-				for(String sessionId : session){
-					eventBus.send(sessionId, "Dice roll 6");
+				JSONObject eventJson = new JSONObject(event.toString());
+				System.out.println(id);
+				String eventAction = eventJson.getString("action");
+				System.out.println(eventAction);
+				
+				switch (eventAction) {
+		            case "enrol_in_game_session":
+		            	String playerColour = eventJson.getString("playerColour");
+		            	String gameSessionID = eventJson.getString("gameSessionID");
+		            	GameSession gs = gameSessionService.getGameSessionInstance(gameSessionID);
+		            	gs.addPlayerSession(id, playerColour);
+		            	System.out.println(String.format("Added player with id %s and colour %s to game %s", 
+		            			id, playerColour, gameSessionID));
+		            	eventBus.send(id, "You have been enrolled in game session #" + gameSessionID);
+		                break;
+		            case "roll_dice":
+		            	for(String sessionId : session){
+							eventBus.send(sessionId, "Dice roll 6");
+						}
+		            	break;
+	                default:
+	                	break;
 				}
 			}
 		});
