@@ -1,7 +1,10 @@
-package com.boardgames.catan.controller;
+package com.boardgames.catan;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.boardgames.catan.controller.CatanServerController;
+import com.boardgames.catan.controller.CatanServerWebsockets;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
@@ -28,11 +31,5 @@ public class CatanServer extends AbstractVerticle {
 		CatanServerWebsockets catanServerWebsockets = new CatanServerWebsockets(vertx);
 		vertx.createHttpServer().websocketHandler(catanServerWebsockets).listen(8081);
 		
-	}
-	
-	private void test(ServerWebSocket request){
-		System.out.println(request.path());
-		BufferFactoryImpl buffer = new BufferFactoryImpl();
-		request.write(buffer.buffer("TASHAK"));
 	}
 }
