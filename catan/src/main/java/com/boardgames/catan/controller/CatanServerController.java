@@ -1,39 +1,48 @@
 package com.boardgames.catan.controller;
 
-import com.boardgames.catan.services.GameSessionService;
+import java.io.IOException;
 
 import io.vertx.core.Vertx;
-import io.vertx.core.json.JsonObject;
+import io.vertx.core.http.HttpServerRequest;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
+import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.handler.CookieHandler;
 import io.vertx.ext.web.handler.SessionHandler;
 import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.sstore.LocalSessionStore;
+
+import com.boardgames.catan.gameSession.GameConfiguration;
+import com.boardgames.catan.gameSession.GameSession;
+import com.boardgames.catan.services.GameSessionService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class CatanServerController {
 	
 	private Router router;
 	private Vertx vertx;
 	private GameSessionService gameSessionService;
+	private ObjectMapper jsonMapper;
 	
 	public CatanServerController (Vertx vertx) {
 		this.vertx = vertx;
 		router = Router.router(vertx);
 		gameSessionService = GameSessionService.getInstance();
+		jsonMapper = new ObjectMapper();
 	}
 	
 	public void init(){
 	    router.route().handler(CookieHandler.create());
 	    router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)));
+	    router.route().handler(BodyHandler.create());
 	    
 	    // GET
 	    router.get("/").handler(this::handleLobbyPage);
 	    router.get("/games/:gameID").handler(this::getGameSession);
 
 	    // POST
-	    router.post("/createSession/").handler(this::createGameSession);
+	    router.post("/createSession").handler(this::createGameSession);
 	    
 	    router.getRoutes().forEach(r -> System.out.println(r));
 	    router.route().handler(StaticHandler.create("web/").setCachingEnabled(false));
@@ -57,15 +66,21 @@ public class CatanServerController {
 	private void getGameSession(RoutingContext routingContext){
 		String gameID = routingContext.request().getParam("gameID");
 		System.out.println(gameID);
-		String jsonString = gameSessionService.getJson(gameID);
+		String jsonString = gameSessionService.getGameSessionAsJson(gameID);
 		
 		routingContext.response().putHeader("content-type", "application/json").end(jsonString);
 	}
 	
 	private void createGameSession(RoutingContext routingContext) {
-		String jsonString = gameSessionService.addGameSession();
-		System.out.println(jsonString);
-		routingContext.response().putHeader("content-type", "application/json").end(jsonString);
+		try {
+			GameConfiguration gameConfiguration = jsonMapper.readValue(routingContext.getBodyAsString(), GameConfiguration.class);
+			GameSession gameSession = new GameSession(gameConfiguration);
+			String jsonString = gameSessionService.addGameSession(gameSession);
+			System.out.println(jsonString);
+			routingContext.response().putHeader("content-type", "application/json").end(jsonString);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public Router getRouter(){

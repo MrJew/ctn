@@ -15,7 +15,7 @@ public class GameSessionService {
 
 	private List<GameSession> gameSessions;
 	private ObjectMapper objectMapper;
-	private static GameSessionService instance = null;
+	private static GameSessionService gameSessionService = null;
 	
 	private GameSessionService() {
 		gameSessions = new ArrayList<>();
@@ -23,19 +23,19 @@ public class GameSessionService {
 	}
 	
 	public static GameSessionService getInstance() {
-	      if(instance == null) {
-	         instance = new GameSessionService();
+	      if(gameSessionService == null) {
+	         gameSessionService = new GameSessionService();
 	      }
-	      return instance;
+	      return gameSessionService;
 	   }
 		
-	public String getJson(String gameID) {
+	public String getGameSessionAsJson(String gameID) {
 		Optional<GameSession> gameSessionOptional = gameSessions.stream().filter(gameSession -> gameSession.getId().equals(gameID)).findFirst();
 		return extractJsonFromObject(gameSessionOptional.get());
 	}
 	
-	public String addGameSession() {
-		GameSession gameSession = new GameSession();
+	public String addGameSession(GameSession gameSession) {
+		gameSessions.add(gameSession);
 		return extractJsonFromObject(gameSession);
 	}
 	

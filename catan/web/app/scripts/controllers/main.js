@@ -43,7 +43,10 @@ angular.module('webApp')
   		});
 
   		$scope.rollDice = function(){
-  			ws.send(JSON.stringify({ action: 'roll_dice' }));
+  			ws.send(JSON.stringify({
+          "action": "enrol_in_game_session",
+          "playerColour": "blue",
+          "gameSessionID": "1460920055792"}));
   		};
 
   		this.awesomeThings = [
@@ -62,21 +65,17 @@ angular.module('webApp')
 
     $scope.dialog={};
     $scope.dialog.name="";
-    $scope.dialog.selectedGameType = "Sttlrs Ctn";
-    $scope.dialog.selectedPlayerCount=4;
+    $scope.dialog.gameType = "Sttlrs Ctn";
+    $scope.dialog.playerCount=4;
 
     $scope.submit = function(){
       console.log($scope.dialog.toString());
 
-      var data = $httpParamSerializer($scope.dialog);
 
-      $http({
-        method: 'POST',
-        url: "http://localhost:8080/createSession",
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        data: data
-      }).success(function(data, status){
-        console.log("New session created:\n" + data)
+      $http.post("http://localhost:8080/createSession", $scope.dialog).success(function(data, status){
+        console.log("New session created:\n" + data.toString)
       });
-    }
+    };
+
+
   });

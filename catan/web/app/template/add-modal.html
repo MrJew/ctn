@@ -13,7 +13,7 @@
 
       <md-input-container class="md-default-theme">
         <label>Game Type</label>
-        <md-select ng-model="dialog.selectedGameType" class="ng-pristine ng-valid ng-touched" value="{{ dialog.selectedGameType }}" placeholder="{{ dialog.selectedGameType }}">
+        <md-select ng-model="dialog.gameType" class="ng-pristine ng-valid ng-touched" value="{{ dialog.gameType }}" placeholder="{{ dialog.selectedGameType }}">
           <md-option  ng-repeat="gameType in gameTypes">
               {{ gameType }}
           </md-option>
@@ -22,7 +22,7 @@
 
       <md-input-container class="md-default-theme">
         <label>Players</label>
-        <md-select ng-model="dialog.selectedPlayerCount" class="ng-pristine ng-valid ng-touched" value="{{ dialog.selectedPlayerCount }}" placeholder="{{ dialog.selectedPlayerCount }}">
+        <md-select ng-model="dialog.playerCount" class="ng-pristine ng-valid ng-touched" value="{{ dialog.playerCount }}" placeholder="{{ dialog.selectedPlayerCount }}">
           <md-option  ng-repeat="number in playerCount">
             {{ number }}
           </md-option>

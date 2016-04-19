@@ -2,12 +2,20 @@ package com.boardgames.catan.gameSession;
 
 import java.util.HashMap;
 
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 public class GameSession {
 
 	private String id;
+	
+	@JsonUnwrapped
+	@JsonSerialize(as=GameConfiguration.class)
+	private GameConfiguration configuration;
+	
 	private HashMap<String, String> players;
 	
-	public GameSession () {
+	public GameSession (GameConfiguration configuration) {
 		id = String.valueOf(System.currentTimeMillis());
 		players = new HashMap<>();
 	}
