@@ -40,7 +40,8 @@ public class CatanServerController {
 	    // GET
 	    router.get("/").handler(this::handleLobbyPage);
 	    router.get("/games/:gameID").handler(this::getGameSession);
-
+		router.get("/games").handler(this::getGameSessions);
+		
 	    // POST
 	    router.post("/createSession").handler(this::createGameSession);
 	    
@@ -73,6 +74,12 @@ public class CatanServerController {
 	private void getGameSession(RoutingContext routingContext){
 		String gameID = routingContext.request().getParam("gameID");
 		String jsonString = gameSessionService.getGameSessionAsJson(gameID);
+		System.out.println(jsonString);
+		routingContext.response().putHeader("content-type", "application/json").end(jsonString);
+	}
+	
+	private void getGameSessions(RoutingContext routingContext){
+		String jsonString = gameSessionService.getGameSessionsAsJson();
 		System.out.println(jsonString);
 		routingContext.response().putHeader("content-type", "application/json").end(jsonString);
 	}

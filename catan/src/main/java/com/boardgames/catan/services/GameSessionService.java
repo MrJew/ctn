@@ -27,11 +27,15 @@ public class GameSessionService {
 	         gameSessionService = new GameSessionService();
 	      }
 	      return gameSessionService;
-	   }
+	}
 		
 	public String getGameSessionAsJson(String gameID) {
 		Optional<GameSession> gameSessionOptional = gameSessions.stream().filter(gameSession -> gameSession.getId().equals(gameID)).findFirst();
 		return extractJsonFromObject(gameSessionOptional.get());
+	}
+	
+	public GameSession getGameSession(String gameID){
+		return gameSessions.stream().filter(gameSession -> gameSession.getId().equals(gameID)).findFirst().get();
 	}
 	
 	public String addGameSession(GameSession gameSession) {
@@ -58,6 +62,14 @@ public class GameSessionService {
 			e.printStackTrace();
 		}
 		return gs;
+	}
+	
+	public List<GameSession> getGameSessions(){
+		return gameSessions;
+	}
+	
+	public String getGameSessionsAsJson() {
+		return extractJsonFromObject(gameSessions);
 	}
 	
 }

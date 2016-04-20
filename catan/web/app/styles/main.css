@@ -59,6 +59,15 @@ body {
   margin-top: 28px;
 }
 
+.sessionCard {
+  margin-top: 25px;
+  border: solid 1px #00d6b2;
+}
+
+.sessionTitle {
+  padding: 5px 5px 5px 5px;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {

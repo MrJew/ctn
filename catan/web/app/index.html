@@ -40,15 +40,24 @@
       <div layout="column" flex id="content">
         <md-content layout="column" flex class="md-padding">
 
-			<button class="md-fab md-primary md-button md-ink-ripple" type="button" aria-label="add" ng-click="showAddDialog('addModal')">
+			  <button class="md-fab md-primary md-button md-ink-ripple" type="button" aria-label="add" ng-click="showAddDialog('addModal')">
                 <md-icon class="material-icons ng-scope ng-isolate-scope">add</md-icon>
               	<div class="md-ripple-container"></div>
-             </button>
+        </button>
 
-			<button class="md-fab md-primary md-button md-ink-ripple" type="button" aria-label="add" ng-click="rollDice()">
+			  <button class="md-fab md-primary md-button md-ink-ripple" type="button" aria-label="add" ng-click="rollDice()">
                 <md-icon class="material-icons ng-scope ng-isolate-scope">domain</md-icon>
               	<div class="md-ripple-container"></div>
-      </button>
+      	</button>
+
+      	<div id="sessionPanel" ng-repeat="session in gameSessions">
+          <div class="sessionCard">
+            <p class="sessionTitle">{{ session.name }}</p>
+          <div layout="row">
+            <md-button ng-repeat="color in gameColors(session.playerCount)" class="md-raised md-primary" ng-click="joinSession(session.id, color)"> Join as {{color}} </md-button>
+          </div>
+          </div>
+      	</div>
 
         </md-content>
       </div>
