@@ -46,7 +46,7 @@ angular.module('webApp')
   			ws.send(JSON.stringify({
           "action": "enrol_in_game_session",
           "playerColour": "blue",
-          "gameSessionID": "1460920055792"}));
+          "gameSessionID": "1461181799631"}));
   		};
 
   		this.awesomeThings = [

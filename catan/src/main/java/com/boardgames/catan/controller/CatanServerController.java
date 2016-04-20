@@ -13,7 +13,6 @@ import io.vertx.ext.web.handler.SessionHandler;
 import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.sstore.LocalSessionStore;
 
-import com.boardgames.catan.gameSession.GameConfiguration;
 import com.boardgames.catan.gameSession.GameSession;
 import com.boardgames.catan.services.GameSessionService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,6 +32,7 @@ public class CatanServerController {
 	}
 	
 	public void init(){
+		setupGameSessionForTesting();
 	    router.route().handler(CookieHandler.create());
 	    router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)));
 	    router.route().handler(BodyHandler.create());
@@ -48,6 +48,13 @@ public class CatanServerController {
 	    router.route().handler(StaticHandler.create("web/").setCachingEnabled(false));
 	}
 	
+	private void setupGameSessionForTesting() {
+		GameSession gameSession = new GameSession("test","Catan",4);
+		gameSession.setId("1461181799631");
+		gameSession.addPlayer("test-session-id-01");
+		gameSessionService.addGameSession(gameSession);
+	}
+
 	private void handleLobbyPage(RoutingContext routingContext){
 	
         Session session = routingContext.session();
@@ -65,16 +72,14 @@ public class CatanServerController {
 	
 	private void getGameSession(RoutingContext routingContext){
 		String gameID = routingContext.request().getParam("gameID");
-		System.out.println(gameID);
 		String jsonString = gameSessionService.getGameSessionAsJson(gameID);
-		
+		System.out.println(jsonString);
 		routingContext.response().putHeader("content-type", "application/json").end(jsonString);
 	}
 	
 	private void createGameSession(RoutingContext routingContext) {
 		try {
-			GameConfiguration gameConfiguration = jsonMapper.readValue(routingContext.getBodyAsString(), GameConfiguration.class);
-			GameSession gameSession = new GameSession(gameConfiguration);
+			GameSession gameSession = jsonMapper.readValue(routingContext.getBodyAsString(), GameSession.class);
 			String jsonString = gameSessionService.addGameSession(gameSession);
 			System.out.println(jsonString);
 			routingContext.response().putHeader("content-type", "application/json").end(jsonString);
