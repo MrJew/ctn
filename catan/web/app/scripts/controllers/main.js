@@ -8,7 +8,7 @@
  * Controller of the webApp
  */
 angular.module('webApp')
-  	.controller('MainCtrl', function ($scope, $mdSidenav, $http, $websocket, $mdDialog) {
+  	.controller('MainCtrl', function ($scope, $mdSidenav, $http, $websocket, $mdDialog, websocketService) {
 
   		$scope.toggleSidenav = function(menuId) {
   			$mdSidenav(menuId).toggle().then(function(){
@@ -26,28 +26,7 @@ angular.module('webApp')
 
   		var ws = $websocket('ws://localhost:8081');
   		ws.binaryType = "arraybuffer";
-  		ws.onMessage(function(message) {
-  	        console.log("DATA" + message.data);
-  	     });
-
-  		ws.onError(function(message){
-  			console.log("Error:" + message);
-  		});
-
-  		ws.onClose(function(message){
-  			console.log("Close:" + message);
-  		});
-
-  		ws.onOpen(function(message){
-  			console.log("Open:" + message);
-  		});
-
-  		$scope.rollDice = function(){
-  			ws.send(JSON.stringify({
-          "action": "enrol_in_game_session",
-          "playerColour": "blue",
-          "gameSessionID": "1461181799631"}));
-  		};
+  		websocketService.handleSocket(ws);
 
   		this.awesomeThings = [
 	      'HTML5 Boilerplate',
