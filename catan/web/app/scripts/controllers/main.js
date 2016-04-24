@@ -10,7 +10,15 @@
 angular.module('webApp')
   	.controller('MainCtrl', function ($scope, $mdSidenav, $http, $websocket, $mdDialog) {
 
-      $scope.colors = ['white','red','blue','yellow','green','brown'];
+      $scope.colors = [
+        {name:'white', color:'grey'},
+        {name:'blue',color:'blue'},
+        {name:'red',color:'red'},
+        {name:'yellow', color:'yellow'},
+        {name:'green', color: 'green'},
+        {name:'brown', color: 'brown'}
+      ];
+
       $scope.gameColors = function(playerCount){
         return $scope.colors.slice(0,playerCount);
       }
