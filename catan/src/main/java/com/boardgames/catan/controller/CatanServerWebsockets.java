@@ -2,10 +2,11 @@ package com.boardgames.catan.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.json.JSONObject;
 
 import com.boardgames.catan.gameSession.GameSession;
-import com.boardgames.catan.services.GameSessionService;
+import com.boardgames.catan.services.impl.GameSessionServiceImpl;
 
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
@@ -21,12 +22,12 @@ public class CatanServerWebsockets implements Handler<ServerWebSocket>{
 
 	final EventBus eventBus;
 	List<String> session;
-	GameSessionService gameSessionService;
+	GameSessionServiceImpl gameSessionService;
 	
 	public CatanServerWebsockets (Vertx vertx){
 		eventBus = vertx.eventBus();
 		session = new ArrayList<>();
-		gameSessionService = GameSessionService.getInstance();
+		gameSessionService = GameSessionServiceImpl.getInstance();
 	}
 	
 	@Override
@@ -55,7 +56,7 @@ public class CatanServerWebsockets implements Handler<ServerWebSocket>{
 		            case "enrol_in_game_session":
 		            	String playerColour = eventJson.getString("playerColour");
 		            	String gameSessionID = eventJson.getString("gameSessionID");
-		            	GameSession gs = gameSessionService.getGameSessionInstance(gameSessionID);
+		            	GameSession gs = gameSessionService.getGameSession(gameSessionID);
 		            	gs.addPlayerSession(id, playerColour);
 		            	System.out.println(String.format("Added player with id %s and colour %s to game %s", 
 		            			id, playerColour, gameSessionID));

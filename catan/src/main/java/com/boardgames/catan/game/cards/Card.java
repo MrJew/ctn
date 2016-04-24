@@ -1,4 +1,4 @@
-package game.cards;
+package com.boardgames.catan.game.cards;
 
 
 public abstract class Card {

@@ -1,17 +1,17 @@
 /**
  * 
  */
-package game.cards.stacks;
+package com.boardgames.catan.game.cards.stacks;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import game.cards.Card;
-import game.cards.configuration.CardConfiguration.Expansion;
-import game.cards.configuration.CardConfiguration.StandardResourceType;
-import game.cards.deck.Deck;
-import game.cards.deck.DevelopmentDeck;
-import game.cards.deck.ResourceDeck;
+import com.boardgames.catan.game.cards.Card;
+import com.boardgames.catan.game.cards.configuration.CardConfiguration.Expansion;
+import com.boardgames.catan.game.cards.configuration.CardConfiguration.StandardResourceType;
+import com.boardgames.catan.game.cards.deck.Deck;
+import com.boardgames.catan.game.cards.deck.DevelopmentDeck;
+import com.boardgames.catan.game.cards.deck.ResourceDeck;
 
 /**
  * @author Sparksmith

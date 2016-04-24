@@ -1,6 +1,6 @@
-package game.cards;
+package com.boardgames.catan.game.cards;
 
-import game.cards.configuration.CardConfiguration.StandardResourceType;
+import com.boardgames.catan.game.cards.configuration.CardConfiguration.StandardResourceType;
 
 public class ResourceCard extends Card{
 	private StandardResourceType type;
