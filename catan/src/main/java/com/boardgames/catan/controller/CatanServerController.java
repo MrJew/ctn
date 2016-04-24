@@ -15,6 +15,7 @@ import io.vertx.ext.web.sstore.LocalSessionStore;
 
 import com.boardgames.catan.gameSession.GameSession;
 import com.boardgames.catan.services.GameSessionService;
+import com.boardgames.catan.services.impl.GameSessionServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class CatanServerController {
@@ -27,7 +28,7 @@ public class CatanServerController {
 	public CatanServerController (Vertx vertx) {
 		this.vertx = vertx;
 		router = Router.router(vertx);
-		gameSessionService = GameSessionService.getInstance();
+		gameSessionService = GameSessionServiceImpl.getInstance();
 		jsonMapper = new ObjectMapper();
 	}
 	
@@ -87,7 +88,8 @@ public class CatanServerController {
 	private void createGameSession(RoutingContext routingContext) {
 		try {
 			GameSession gameSession = jsonMapper.readValue(routingContext.getBodyAsString(), GameSession.class);
-			String jsonString = gameSessionService.addGameSession(gameSession);
+			String gameId = gameSessionService.addGameSession(gameSession);
+			String jsonString = gameSessionService.getGameSessionAsJson(gameId);
 			System.out.println(jsonString);
 			routingContext.response().putHeader("content-type", "application/json").end(jsonString);
 		} catch (IOException e) {

@@ -1,6 +1,6 @@
-package game.cards;
+package com.boardgames.catan.game.cards;
 
-import game.cards.configuration.CardConfiguration.StandardDevelopmentType;
+import com.boardgames.catan.game.cards.configuration.CardConfiguration.StandardDevelopmentType;
 
 public class DevelopmentCard extends Card{
 	private String action;

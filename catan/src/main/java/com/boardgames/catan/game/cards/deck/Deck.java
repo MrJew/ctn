@@ -1,12 +1,12 @@
 /**
  * 
  */
-package game.cards.deck;
+package com.boardgames.catan.game.cards.deck;
 
 import java.util.ArrayList;
 import java.util.Stack;
 
-import game.cards.Card;
+import com.boardgames.catan.game.cards.Card;
 
 /**
  * @author Sparksmith

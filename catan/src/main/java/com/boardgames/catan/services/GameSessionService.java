@@ -1,75 +1,42 @@
 package com.boardgames.catan.services;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import com.boardgames.catan.gameSession.GameSession;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.vertx.core.json.JsonObject;
-
-public class GameSessionService {
-
-	private List<GameSession> gameSessions;
-	private ObjectMapper objectMapper;
-	private static GameSessionService gameSessionService = null;
+public interface GameSessionService {
 	
-	private GameSessionService() {
-		gameSessions = new ArrayList<>();
-		objectMapper = new ObjectMapper();
-	}
 	
-	public static GameSessionService getInstance() {
-	      if(gameSessionService == null) {
-	         gameSessionService = new GameSessionService();
-	      }
-	      return gameSessionService;
-	}
-		
-	public String getGameSessionAsJson(String gameID) {
-		Optional<GameSession> gameSessionOptional = gameSessions.stream().filter(gameSession -> gameSession.getId().equals(gameID)).findFirst();
-		return extractJsonFromObject(gameSessionOptional.get());
-	}
+	/**
+	 * Retrieve all game sessions
+	 * @return
+	 */
+	List<GameSession> getGameSessions();
 	
-	public GameSession getGameSession(String gameID){
-		return gameSessions.stream().filter(gameSession -> gameSession.getId().equals(gameID)).findFirst().get();
-	}
+	/**
+	 * Retrieve all game sessions as JSON
+	 * @return
+	 */
+	String getGameSessionsAsJson();
 	
-	public String addGameSession(GameSession gameSession) {
-		gameSessions.add(gameSession);
-		return extractJsonFromObject(gameSession);
-	}
+	/**
+	 * Gets games session by gameID
+	 * @param gameID
+	 * @return
+	 */
+	GameSession getGameSession(String gameID);
 	
-	private String extractJsonFromObject(Object obj){
-		String result = "{}";
-		try {
-			result = objectMapper.writeValueAsString(obj);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
+	/**
+	 *  Get game session as JSON from gameID
+	 * @param gameID
+	 * @return
+	 */
+	String getGameSessionAsJson(String gameID);
 	
-	public GameSession getGameSessionInstance(String gameID){
-		Optional<GameSession> gameSessionOptional = gameSessions.stream().filter(gameSession -> gameSession.getId().equals(gameID)).findFirst();
-		GameSession gs = null;
-		try {
-			gs = gameSessionOptional.get();
-		} catch (NoSuchElementException e){
-			e.printStackTrace();
-		}
-		return gs;
-	}
-	
-	public List<GameSession> getGameSessions(){
-		return gameSessions;
-	}
-	
-	public String getGameSessionsAsJson() {
-		return extractJsonFromObject(gameSessions);
-	}
-	
+	/**
+	 *  Add a game session and retrieve id;
+	 * @param gameSession
+	 * @return
+	 */
+	String addGameSession(GameSession gameSession);
 }

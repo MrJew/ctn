@@ -1,7 +1,7 @@
 /**
  * 
  */
-package game.cards.configuration;
+package com.boardgames.catan.game.cards.configuration;
 
 /**
  * @author Sparksmith

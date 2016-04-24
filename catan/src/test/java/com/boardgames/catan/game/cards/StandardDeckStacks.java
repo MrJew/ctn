@@ -1,12 +1,12 @@
 /**
  * 
  */
-package game.cards;
+package com.boardgames.catan.game.cards;
 
 import java.util.ArrayList;
 
-import game.cards.configuration.CardConfiguration.StandardResourceType;
-import game.cards.stacks.StandardCatanDeckStacks;
+import com.boardgames.catan.game.cards.configuration.CardConfiguration.StandardResourceType;
+import com.boardgames.catan.game.cards.stacks.StandardCatanDeckStacks;
 import junit.framework.TestCase;
 
 /**

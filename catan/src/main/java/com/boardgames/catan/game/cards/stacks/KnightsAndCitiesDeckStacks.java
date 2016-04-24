@@ -1,4 +1,4 @@
-package game.cards.stacks;
+package com.boardgames.catan.game.cards.stacks;
 
 /**
  * HAHAHA no

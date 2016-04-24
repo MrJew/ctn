@@ -1,16 +1,16 @@
 /**
  * 
  */
-package game.cards;
+package com.boardgames.catan.game.cards;
 
 import java.util.ArrayList;
 
-import game.cards.Card;
-import game.cards.configuration.CardConfiguration.Expansion;
-import game.cards.configuration.CardConfiguration.StandardCatanCardQuantities;
-import game.cards.configuration.CardConfiguration.StandardResourceType;
-import game.cards.deck.DevelopmentDeck;
-import game.cards.deck.ResourceDeck;
+import com.boardgames.catan.game.cards.Card;
+import com.boardgames.catan.game.cards.configuration.CardConfiguration.Expansion;
+import com.boardgames.catan.game.cards.configuration.CardConfiguration.StandardCatanCardQuantities;
+import com.boardgames.catan.game.cards.configuration.CardConfiguration.StandardResourceType;
+import com.boardgames.catan.game.cards.deck.DevelopmentDeck;
+import com.boardgames.catan.game.cards.deck.ResourceDeck;
 import junit.framework.TestCase;
 
 /**

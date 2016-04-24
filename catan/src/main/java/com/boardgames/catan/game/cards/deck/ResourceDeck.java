@@ -1,12 +1,12 @@
 /**
  * 
  */
-package game.cards.deck;
+package com.boardgames.catan.game.cards.deck;
 
-import game.cards.ResourceCard;
-import game.cards.configuration.CardConfiguration.Expansion;
-import game.cards.configuration.CardConfiguration.StandardResourceType;
-import game.cards.configuration.CardConfiguration.StandardCatanCardQuantities;
+import com.boardgames.catan.game.cards.ResourceCard;
+import com.boardgames.catan.game.cards.configuration.CardConfiguration.Expansion;
+import com.boardgames.catan.game.cards.configuration.CardConfiguration.StandardResourceType;
+import com.boardgames.catan.game.cards.configuration.CardConfiguration.StandardCatanCardQuantities;
 
 /**
  * Create a deck filled with the same type of cards, with the amount based on the current edition of catan
